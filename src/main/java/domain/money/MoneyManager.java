@@ -26,7 +26,7 @@ public class MoneyManager {
     }
 
     public Profit makeDealerProfit() {
-        Profit profit = new Profit(new BigDecimal("0"));
+        Profit profit = new Profit(BigDecimal.ZERO);
         for (Map.Entry<Player, Profit> entries : calculateProfit().entrySet()) {
             profit = profit.sum(entries.getValue());
         }
