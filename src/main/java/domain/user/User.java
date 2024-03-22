@@ -4,11 +4,12 @@ import domain.card.Card;
 import domain.deck.UserDeck;
 
 public class User {
-    protected final UserDeck userDeck = new UserDeck();
+    protected final UserDeck userDeck;
     protected final Name name;
 
     public User(Name name) {
         this.name = name;
+        this.userDeck = new UserDeck();
     }
 
     public void addCard(Card card) {
