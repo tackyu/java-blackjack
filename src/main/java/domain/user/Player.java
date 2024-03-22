@@ -3,14 +3,14 @@ package domain.user;
 import domain.money.Money;
 
 public class Player extends User {
-    private final Money money;
+    private final Money betAmount;
 
-    public Player(Name name, Money money) {
+    public Player(Name name, Money betAmount) {
         super(name);
-        this.money = money;
+        this.betAmount = betAmount;
     }
 
-    public Money getMoney() {
-        return money;
+    public Money getBetAmount() {
+        return betAmount;
     }
 }

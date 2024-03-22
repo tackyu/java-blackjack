@@ -18,7 +18,7 @@ public class MoneyManager {
     public Map<Player, Profit> calculateProfit() {
         Map<Player, Profit> profitManager = new LinkedHashMap<>();
         playerResults.forEach((player, result) -> {
-                    Money money = player.getMoney();
+                    Money money = player.getBetAmount();
                     profitManager.put(player, money.makeProfit(result));
                 }
         );
