@@ -25,7 +25,7 @@ import static domain.game.State.STAY;
 public class GameController {
 
     public void play() {
-        Users users = makeUsers();
+        Users users = createUsers();
         Game game = new Game(TotalDeckGenerator.generate(), users);
         showStartStatus(users);
         hitOrStay(game, users);
@@ -33,10 +33,14 @@ public class GameController {
         showResult(users, moneyManager);
     }
 
-    private Users makeUsers() {
+    private Users createUsers() {
         Names names = ExceptionHandler.handle(() -> new Names(getNames()));
         List<Player> players = new ArrayList<>();
-        updatePlayers(names, players);
+        for (Name name : names.value()) {
+            Money money = ExceptionHandler.handle(() -> new Money(InputView.inputBetting(name.value())));
+            Player player = new Player(name, money);
+            players.add(player);
+        }
         return new Users(Collections.unmodifiableList(players));
     }
 
@@ -47,14 +51,6 @@ public class GameController {
                     .map(Name::new)
                     .collect(Collectors.toList());
         });
-    }
-
-    private void updatePlayers(Names names, List<Player> players) {
-        for (Name name : names.value()) {
-            Money money = ExceptionHandler.handle(() -> new Money(InputView.inputBetting(name.value())));
-            Player player = new Player(name, money);
-            players.add(player);
-        }
     }
 
     private void showStartStatus(Users users) {
